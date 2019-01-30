@@ -1,4 +1,6 @@
-## collectively, these functions eliminate the need to compute the inverse repeatedly by retriving it from cache when the matrix hasn't changed
+## collectively, these functions eliminate the need
+## to compute the inverse repeatedly by retriving it from cache
+## when the matrix hasn't changed
 
 ## this function creates object "matrix" that can cache its inverse
 
@@ -9,7 +11,7 @@ makeCacheMatrix <- function(x = matrix()) {
     inverse <<- NULL
   }
   get <- function() matrix
-  setInverse <- function(newInverse) inverse <<- solve(x)
+  setInverse <- function(newInverse) inverse <<- newMatrix(x)
   getInverse <- function() inverse
   list(set = set, get = get, setInverse = setInverse, getInverse = getInverse)
 }
@@ -24,7 +26,7 @@ cacheSolve <- function(x, ...) {
     return(newMatrix)
   }
   data <- x$get()
-  newMatrix <- inverse(data, ...)
+  newMatrix <- solve(data)
   x$setInverse(newMatrix)
   newMatrix
 }
